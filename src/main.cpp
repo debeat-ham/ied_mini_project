@@ -49,4 +49,7 @@ void loop() {
   //Code to continuously display sensor readings
   int* sensor_array = read_sensors();
   delay(200);
+  
+  //Free up allocated memory
+  delete[] sensor_array;
 }
