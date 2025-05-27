@@ -36,8 +36,8 @@ void setup_sensor() {
 
 
 /// @brief Gets the error as detected by the sensors. A negative error means we
-///        are too far to the left, while a positive error means we are too far
-///        to the right.
+///        need to turn to the left, while a positive error means we need to
+///        turn to the right.
 float get_error() {
     int* sensor_array = read_sensor();
     // Change the readings int either high or low
