@@ -9,6 +9,8 @@ int S3 = A3;
 int S4 = A4;
 int S5 = A5;
 
+const int enable_pin = 8;
+
 int sensor_array[5] = {0, 0, 0, 0, 0};
 
 /// @brief Reads the sensor array.
@@ -32,6 +34,8 @@ void setup_sensor() {
     pinMode(S3, INPUT);
     pinMode(S4, INPUT);
     pinMode(S5, INPUT);
+
+    pinMode(enable_pin, INPUT_PULLUP);
 }
 
 
@@ -49,4 +53,8 @@ float get_error() {
             error += error_weights[i];
     }
     return error;
+}
+
+bool car_enabled() {
+    return digitalRead(enable_pin) == HIGH;
 }

@@ -1,11 +1,16 @@
 #include <Arduino.h>
 #include "sensor.h"
 #include "motors.h"
+#include "pid.h"
 
 // PID parameters
 const float kp = 0.1;
 const float ki = 0;
 const float kd = 0;
+
+const float speed = 1;
+
+pid_controller controller(kp, ki, kd);
 
 void setup() {
   setup_sensor();
@@ -17,10 +22,16 @@ void setup() {
 
 void loop() {
   float error = get_error();
-  float turn_factor = 0.5f + error * kp;
-  set_left_motor(1 - turn_factor);
-  set_right_motor(turn_factor);
-
+  float turn_factor = 0.5f + controller.execute(error);
+  
+  if (car_enabled()) {
+    set_left_motor((1 - turn_factor) * speed);
+    set_right_motor(turn_factor  * speed);
+  } else {
+    set_left_motor(0);
+    set_right_motor(0);
+  }
+  
   Serial.print("Error: ");
   Serial.print(error);
   Serial.print("\tLeft motor: ");
@@ -28,5 +39,7 @@ void loop() {
   Serial.print("\tRight motor: ");
   Serial.print(turn_factor);
   Serial.println();
-  
+
+  // The PID mus tbe evaluated at a regular interval, so we delay a little.
+  delay(20);
 }
