@@ -4,11 +4,11 @@
 #include "pid.h"
 
 // PID parameters
-const float kp = 0.1;
+const float kp = 0.3;
 const float ki = 0;
 const float kd = 0;
 
-const float speed = 1;
+const float speed = -1;
 
 pid_controller controller(kp, ki, kd);
 
@@ -25,8 +25,8 @@ void loop() {
   float turn_factor = 0.5f + controller.execute(error);
   
   if (car_enabled()) {
-    set_left_motor(turn_factor * speed);
-    set_right_motor((1 - turn_factor)  * speed);
+    set_left_motor((1- turn_factor) * speed);
+    set_right_motor((turn_factor)  * speed);
   } else {
     set_left_motor(0);
     set_right_motor(0);
