@@ -22,12 +22,12 @@ const int in4 = 5; // Input 4 on PIN5
 /// @param hb2 H-Bridge pin 2
 void set_motor(float percent, int enable, int hb1, int hb2) {
   if (percent > 0) {
-    digitalWrite(hb1, LOW);
-    digitalWrite(hb2, HIGH);
-  }
-  else if (percent < 0) {
     digitalWrite(hb1, HIGH);
     digitalWrite(hb2, LOW);
+  }
+  else if (percent < 0) {
+    digitalWrite(hb1, LOW);
+    digitalWrite(hb2, HIGH);
   }
 
   percent = max(percent, -percent);
