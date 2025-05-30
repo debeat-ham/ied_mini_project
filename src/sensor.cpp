@@ -59,7 +59,7 @@ float get_error() {
         }
     }
 
-    if (any_detected)
+    if (!any_detected)
         return last_error;
     
     last_error = error;

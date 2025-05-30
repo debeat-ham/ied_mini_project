@@ -4,7 +4,7 @@
 #include "pid.h"
 
 // PID parameters
-const float kp = 0.3;
+const float kp = 0.1;
 const float ki = 0;
 const float kd = 0;
 
@@ -34,10 +34,10 @@ void loop() {
   
   Serial.print("Error: ");
   Serial.print(error);
-  Serial.print("\tLeft motor: ");
-  Serial.print(1 - turn_factor);
-  Serial.print("\tRight motor: ");
-  Serial.print(turn_factor);
+  // Serial.print("\tLeft motor: ");
+  // Serial.print(1 - turn_factor);
+  // Serial.print("\tRight motor: ");
+  // Serial.print(turn_factor);
   Serial.println();
 
   // The PID mus tbe evaluated at a regular interval, so we delay a little.
