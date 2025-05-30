@@ -11,6 +11,8 @@ int S5 = A5;
 
 const int enable_pin = 8;
 
+int last_error;
+
 int sensor_array[5] = {0, 0, 0, 0, 0};
 
 /// @brief Reads the sensor array.
@@ -46,12 +48,22 @@ float get_error() {
     int* sensor_array = read_sensor();
     // Change the readings int either high or low
 
+    bool any_detected = false;
+
     float error_weights[] = {-2, -1, 0, 1, 2};
     float error = 0;
     for (int i = 0; i < 5; i++) {
-        if (sensor_array[i] <= DETECTION_THRESHOLD)
+        if (sensor_array[i] <= DETECTION_THRESHOLD) {
+            any_detected = true;
             error += error_weights[i];
+        }
     }
+
+    if (any_detected)
+        return last_error;
+    
+    last_error = error;
+    
     return error;
 }
 
