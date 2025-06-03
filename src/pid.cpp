@@ -6,7 +6,7 @@ float decay = 0.9f;
 /// @note This function must be called at a regular time interval
 /// @param error The measured error to input
 /// @return PID output
-float pid_controller::execute(float error) {
+float pid_controller::execute(float error, float p) {
     float p_term = p * error;
     accumulation = accumulation * decay + error;
     float i_term = i * accumulation;

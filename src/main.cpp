@@ -22,7 +22,8 @@ void setup() {
 
 void loop() {
   float error = get_error();
-  float turn_factor = 0.5f + controller.execute(error);
+  float p_val = get_potentiometer() * 0.3f;
+  float turn_factor = 0.5f + controller.execute(error, p_val);
   
   if (car_enabled()) {
     set_left_motor((1- turn_factor) * speed);
@@ -32,8 +33,8 @@ void loop() {
     set_right_motor(0);
   }
   
-  Serial.print("Error: ");
-  Serial.print(error);
+  Serial.print("P value: ");
+  Serial.print(p_val);
   // Serial.print("\tLeft motor: ");
   // Serial.print(1 - turn_factor);
   // Serial.print("\tRight motor: ");

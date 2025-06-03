@@ -1,6 +1,7 @@
 #include <Arduino.h>
 
 const int DETECTION_THRESHOLD = 500;
+const int RESOLUTION_BITS = 10;
 
 //Analog Sensor Pins
 int S1 = A1;
@@ -8,6 +9,9 @@ int S2 = A2;
 int S3 = A3;
 int S4 = A4;
 int S5 = A5;
+
+// Potentiometer sensor
+int P0 = A0;
 
 const int enable_pin = 8;
 
@@ -37,6 +41,9 @@ void setup_sensor() {
     pinMode(S4, INPUT);
     pinMode(S5, INPUT);
 
+    pinMode(P0, INPUT);
+    analogReadResolution(RESOLUTION_BITS);
+
     pinMode(enable_pin, INPUT_PULLUP);
 }
 
@@ -65,6 +72,12 @@ float get_error() {
     last_error = error;
     
     return error;
+}
+
+/// @brief Gets the analog reading from the potentiometer
+/// @return A float between 0 and 1
+float get_potentiometer() {
+    return ((float)analogRead(P0)) / (1 << RESOLUTION_BITS);
 }
 
 bool car_enabled() {
