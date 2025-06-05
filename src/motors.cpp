@@ -20,6 +20,7 @@ const int in4 = 5; // Input 4 on PIN5
 /// @param enable Enable pin
 /// @param hb1 H-Bridge pin 1
 /// @param hb2 H-Bridge pin 2
+
 void set_motor(float percent, int enable, int hb1, int hb2) {
   if (percent > 0) {
     digitalWrite(hb1, HIGH);

@@ -4,7 +4,7 @@
 #include "pid.h"
 
 // PID parameters
-const float kp = 0.1;
+const float kp = 0.1; //0 - 0.3
 const float ki = 0;
 const float kd = 0;
 
