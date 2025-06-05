@@ -10,5 +10,5 @@ private:
 
 public:
     pid_controller(float p, float i, float d): p(p), i(i), d(d) {}
-    float execute(float error);
+    float execute(float error, float p);
 };

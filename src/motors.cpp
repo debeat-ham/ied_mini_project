@@ -33,6 +33,7 @@ void set_motor(float percent, int enable, int hb1, int hb2) {
 
   percent = max(percent, -percent);
   int int_percent = (int)floor(percent * 255);
+  int_percent = min(int_percent, 255); // in case percent was over 1
   analogWrite(enable, int_percent);
 }
 
