@@ -27,19 +27,21 @@ void loop() {
    // float p_val = get_potentiometer() * 0.3f; // Can be made higher if base_factor is lower
   float p_val = kp;
   
-  // float base_factor = 0.5f;
-  float base_factor = get_potentiometer();
+  float base_factor = 0.4f;
+  // float base_factor = get_potentiometer();
 
-  // float speed = get_potentiometer() * -1;
-  float speed = -1;
+  float speed = get_potentiometer() * -2;
+  // float speed = -2;
 
   /* ================= End Tunable Constants ================= */
   float error = get_error();
-  float turn_factor = base_factor + controller.execute(error, p_val);
+  float res = controller.execute(error, p_val);
+  float r_turn_factor = base_factor - res;
+  float l_turn_factor = base_factor + res;
   
   if (car_enabled()) {
-    set_left_motor((1- turn_factor) * speed);
-    set_right_motor((turn_factor)  * speed);
+    set_left_motor(r_turn_factor * speed);
+    set_right_motor(l_turn_factor  * speed);
   } else {
     set_left_motor(0);
     set_right_motor(0);
